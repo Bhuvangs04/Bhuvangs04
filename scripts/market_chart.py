@@ -1,24 +1,29 @@
 import yfinance as yf
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 
 def generate_chart():
-    # 1. Fetch Data (Bitcoin or SPY)
-    data = yf.download("BTC-USD", period="7d", interval="90m")
+    # 1. Fetch Data (Safer Method)
+    # Using .history() prevents MultiIndex errors common in yf.download
+    ticker = yf.Ticker("BTC-USD")
+    data = ticker.history(period="7d", interval="90m")
     
-    # 2. Setup "Hacker Dark Mode" Plot
+    if data.empty:
+        print("Error: No data fetched for BTC-USD")
+        return
+
+    # 2. Setup Dark Mode Plot
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 5))
     
-    # Matches GitHub Dark Mode Background
+    # Transparent/Dark Backgrounds
     fig.patch.set_facecolor('#0d1117') 
     ax.set_facecolor('#0d1117')
 
-    # 3. Plot the Line (Neon Green)
+    # 3. Plot Data
     ax.plot(data.index, data['Close'], color='#20C20E', linewidth=2)
     ax.fill_between(data.index, data['Close'], color='#20C20E', alpha=0.1)
 
-    # 4. Minimalist Axis
+    # 4. Styling
     ax.grid(color='#2d333b', linestyle='--', linewidth=0.5)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
