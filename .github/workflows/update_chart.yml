@@ -32,3 +32,4 @@ jobs:
           git add chart.png
           git diff --quiet && git diff --staged --quiet || git commit -m "Update chart"
           git push
+          
