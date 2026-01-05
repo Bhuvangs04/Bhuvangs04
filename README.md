@@ -257,7 +257,7 @@ public:
 
 </div>
 
----
+<!-- ---
 
 ## 📈 GITHUB ANALYTICS
 
@@ -274,7 +274,7 @@ public:
 
 </div>
 
----
+--- -->
 
 ## 💎 SKILLS BREAKDOWN
 
